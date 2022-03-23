@@ -1,0 +1,6 @@
+mutation SignOutFromCourse($courseId: Float!) {
+   signOutFromCourse(courseId: $courseId) {
+      id
+      title
+   }
+}

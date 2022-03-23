@@ -1,0 +1,7 @@
+mutation DeleteReview($id: String!) {
+   removeReview(id: $id) {
+      id
+      courseId
+      userId
+   }
+}

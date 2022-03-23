@@ -1,0 +1,6 @@
+query RefreshTokens {
+   refreshTokens {
+      access_token
+      refresh_token
+   }
+}

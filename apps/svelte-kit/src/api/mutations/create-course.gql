@@ -1,0 +1,20 @@
+mutation CreateCourse(
+   $title: String!
+   $description: String!
+   $price: Int!
+   $discount: Int
+   $file: Upload
+) {
+   createCourse(
+      data: {
+         title: $title
+         description: $description
+         price: $price
+         discount: $discount
+      }
+      file: $file
+   ) {
+      id
+      title
+   }
+}

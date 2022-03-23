@@ -1,0 +1,40 @@
+query CurrentUser(
+   $skipCourses: Int
+   $takeCourses: Int
+   $skipReviews: Int
+   $takeReviews: Int
+) {
+   currentUser {
+      ... on User {
+         id
+         email
+         name
+         lastName
+         role
+         _count {
+            courses
+            reviews
+         }
+         courses(skip: $skipCourses, take: $takeCourses) {
+            count
+            id
+            title
+            description
+            price
+            discount
+            mainImage
+         }
+         reviews(skip: $skipReviews, take: $takeReviews) {
+            id
+            text
+            rating
+            createdAt
+            currentUser
+            course {
+               id
+               title
+            }
+         }
+      }
+   }
+}

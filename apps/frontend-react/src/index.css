@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   @apply font-proxima-bold;
+}
+
+h1 {
+   @apply text-2xl;
+}
+
+@tailwind utilities;
+
+@font-face {
+   font-family: 'proxima';
+   src: url('../public/static/fonts/proxima/ProximaNova-Regular.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'proxima-medium';
+   src: url('../public/static/fonts/proxima/ProximaNova-Semibold.woff')
+      format('woff');
+   font-weight: medium;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'proxima-bold';
+   src: url('../public/static/fonts/proxima/ProximaNova-Bold.woff')
+      format('woff');
+   font-weight: bold;
+   font-style: normal;
+}
+
+* {
+   font-family: 'proxima', Arial;
+}
+
+code {
+   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+}
+
+button:disabled {
+   opacity: 0.75;
+}

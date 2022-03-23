@@ -1,0 +1,229 @@
+type JwtPayload {
+  email: String!
+  id: String!
+  role: UserRole!
+  iat: Int!
+  exp: Int!
+}
+
+"""Role of user"""
+enum UserRole {
+  USER
+  ADMIN
+  TESTER
+}
+
+type ReviewUser {
+  id: String!
+  name: String!
+  lastName: String!
+}
+
+type Review {
+  id: String!
+  rating: Int!
+  text: String
+  userId: String!
+  courseId: ID!
+  user: ReviewUser!
+  course: Course!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  currentUser: Boolean
+  count: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type UserCount {
+  courses: Float!
+  reviews: Float!
+}
+
+type User {
+  id: ID!
+  name: String!
+  lastName: String!
+  email: String!
+  role: UserRole!
+  passwordHash: String!
+  hashedRt: String
+  courses(skip: Int, take: Int, orderBy: CourseOrderBy = createdAt, sortOrder: SortOrder = desc, title: String): [Course!]!
+  reviews(skip: Int, take: Int, orderBy: ReviewOrderBy = createdAt, sortOrder: SortOrder = desc): [Review!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  isActive: Boolean!
+  confirmTokenHash: String
+  _count: UserCount!
+  count: Int!
+}
+
+"""Order by for courses"""
+enum CourseOrderBy {
+  rating
+  price
+  createdAt
+  title
+  id
+  users
+  reviews
+  discount
+}
+
+"""Order of sorting"""
+enum SortOrder {
+  asc
+  desc
+}
+
+"""Order by for reviews"""
+enum ReviewOrderBy {
+  rating
+  createdAt
+  id
+  text
+  user
+  course
+}
+
+type CourseCount {
+  users: Int!
+  reviews: Int!
+}
+
+type Course {
+  id: Int!
+  title: String!
+  description: String!
+  mainImage: String
+  images: String
+  rating: Float
+  price: Int!
+  discount: Int
+  users: [User!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  reviews: [Review!]!
+  _count: CourseCount!
+  currentUser: Boolean
+  currentUserReview: Boolean
+  count: Int!
+  userCount: Int!
+}
+
+type Tokens {
+  access_token: String!
+  refresh_token: String!
+}
+
+type Query {
+  course(id: Float!): Course!
+  courses(skip: Int, take: Int, orderBy: CourseOrderBy = createdAt, sortOrder: SortOrder = desc, title: String): [Course!]!
+  users(skip: Int, take: Int, orderBy: UserOrderBy = name, sortOrder: SortOrder = asc): [User!]!
+  user(id: String!): User!
+  currentUser: CurrentUserUnion!
+  refreshTokens: Tokens!
+
+  """For admin purposes"""
+  reviews(skip: Int, take: Int, orderBy: ReviewOrderBy = createdAt, sortOrder: SortOrder = desc): [Review!]!
+  review(id: String!): Review!
+}
+
+"""Order by for users"""
+enum UserOrderBy {
+  id
+  name
+  lastName
+  email
+  role
+  courses
+  reviews
+}
+
+union CurrentUserUnion = User | UserEmpty
+
+type UserEmpty {
+  user: Boolean!
+}
+
+type Mutation {
+  createCourse(file: Upload, data: CreateCourseInput!): Course!
+  removeCourse(id: Int!): Course!
+  createUser(data: CreateUserInput!): User!
+  updateUser(data: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  signUpForCourse(courseId: Float!): Course!
+  signOutFromCourse(courseId: Float!): Course!
+  logIn(data: AuthInput!): Tokens!
+  logOut: User!
+  signUp(data: CreateUserInput!): Tokens!
+  confirmUser(token: String!): User!
+  changePassword(data: ChangePasswordInput!): User!
+  resetPassword(data: ResetPasswordInput!, token: String!): JwtPayload!
+  requestPasswordReset(data: RequestPasswordInput!): Boolean!
+  createReview(data: CreateReviewInput!): Review!
+  updateReview(data: UpdateReviewInput!): Review!
+  removeReview(id: String!): Review!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input CreateCourseInput {
+  title: String!
+  description: String!
+  mainImage: String
+  images: String
+  price: Int!
+  discount: Int
+  users: [ID!]
+}
+
+input CreateUserInput {
+  name: String!
+  lastName: String!
+  email: String!
+  password: String!
+  role: UserRole
+}
+
+input UpdateUserInput {
+  id: String!
+  name: String
+  lastName: String
+  email: String
+  role: UserRole
+}
+
+input AuthInput {
+  email: String!
+  password: String!
+}
+
+input ChangePasswordInput {
+  password: String!
+}
+
+input ResetPasswordInput {
+  password: String!
+  repeatPassword: String!
+}
+
+input RequestPasswordInput {
+  email: String!
+}
+
+input CreateReviewInput {
+  rating: Int!
+  text: String
+  courseId: Int!
+}
+
+input UpdateReviewInput {
+  rating: Int
+  text: String
+  id: String!
+}

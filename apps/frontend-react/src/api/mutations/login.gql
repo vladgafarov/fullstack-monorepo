@@ -1,0 +1,6 @@
+mutation LogIn($email: String!, $password: String!) {
+   logIn(data: { email: $email, password: $password }) {
+      access_token
+      refresh_token
+   }
+}

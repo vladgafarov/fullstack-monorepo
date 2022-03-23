@@ -1,0 +1,17 @@
+query GetUsers(
+   $take: Int
+   $skip: Int
+   $orderBy: UserOrderBy
+   $sortOrder: SortOrder
+) {
+   users(take: $take, skip: $skip, orderBy: $orderBy, sortOrder: $sortOrder) {
+      id
+      count
+      name
+      lastName
+      _count {
+         courses
+         reviews
+      }
+   }
+}

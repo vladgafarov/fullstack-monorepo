@@ -1,0 +1,22 @@
+query GetReviews(
+   $take: Int
+   $skip: Int
+   $orderBy: ReviewOrderBy
+   $sortOrder: SortOrder
+) {
+   reviews(take: $take, skip: $skip, orderBy: $orderBy, sortOrder: $sortOrder) {
+      id
+      rating
+      text
+      count
+      course {
+         title
+         id
+      }
+      user {
+         name
+         lastName
+         id
+      }
+   }
+}

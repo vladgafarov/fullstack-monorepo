@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   @apply font-proxima-bold;
+}
+
+h1 {
+   @apply text-2xl;
+}
+
+@tailwind utilities;
+
+@layer components {
+   /* Buttons */
+   button:disabled {
+      @apply cursor-not-allowed opacity-70;
+   }
+
+   .btn {
+      @apply font-bold py-2 px-4 rounded border-2;
+   }
+
+   .btn-primary {
+      @apply text-white bg-blue-500 border-blue-500 
+         hover:bg-blue-700 hover:border-blue-700
+         focus:bg-blue-800;
+   }
+
+   .btn-outline {
+      @apply border-blue-500 text-blue-500 bg-white
+         hover:bg-blue-100
+         focus:bg-blue-200;
+   }
+
+   /* Form */
+   input {
+      @apply border-2 border-blue-500 rounded-md
+         px-4 py-2
+         focus:ring-2 focus:ring-blue-300
+         outline-none
+         w-full;
+   }
+
+   label {
+      @apply flex flex-col;
+   }
+   label span {
+   }
+
+   /* --- */
+
+   .error {
+      @apply text-red-500 py-1 font-proxima-medium;
+   }
+}
+
+@font-face {
+   font-family: 'proxima';
+   src: url('../static/fonts/proxima/ProximaNova-Regular.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'proxima-medium';
+   src: url('../static/fonts/proxima/ProximaNova-Semibold.woff') format('woff');
+   font-weight: medium;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'proxima-bold';
+   src: url('../static/fonts/proxima/ProximaNova-Bold.woff') format('woff');
+   font-weight: bold;
+   font-style: normal;
+}
+
+* {
+   font-family: 'proxima', Arial, sans-serif;
+}

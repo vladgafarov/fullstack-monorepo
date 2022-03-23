@@ -1,0 +1,13 @@
+schema: http://localhost:3000/graphql
+documents: '**/*.gql'
+generates:
+   ./src/api/generated.ts:
+      plugins:
+         - typescript
+         - typescript-operations
+         - typescript-react-query
+      config:
+         fetcher:
+            '@api/fetcher#fetchData'
+            # graphql-request
+            # endpoint: 'process.env.REACT_APP_BACKEND_URL'

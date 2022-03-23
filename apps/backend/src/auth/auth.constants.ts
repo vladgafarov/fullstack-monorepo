@@ -1,0 +1,5 @@
+export const LOGIN_ERROR = 'Неверный логин или пароль'
+export const CHANGE_PASSWORD_ERROR = 'Нельзя сменить пароль на тот же самый'
+export const FOBIDDEN_RESOURCE = 'Недостаточно прав'
+export const INVALID_TOKEN = 'Неверный токен'
+export const NOT_EQUAL_PASSWORDS = 'Пароли не совпадают'

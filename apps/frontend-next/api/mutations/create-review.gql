@@ -1,0 +1,5 @@
+mutation CreateReview($rating: Int!, $text: String, $courseId: Int!) {
+   createReview(data: { rating: $rating, text: $text, courseId: $courseId }) {
+      id
+   }
+}

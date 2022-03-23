@@ -1,0 +1,6 @@
+mutation SignUpForCourse($courseId: Float!) {
+   signUpForCourse(courseId: $courseId) {
+      id
+      title
+   }
+}

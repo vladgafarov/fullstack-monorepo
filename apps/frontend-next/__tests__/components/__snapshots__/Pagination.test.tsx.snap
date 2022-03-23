@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination component test Should not render when < 2 pages 1`] = `<div />`;

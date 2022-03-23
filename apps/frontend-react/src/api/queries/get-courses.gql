@@ -1,0 +1,30 @@
+query GetCourses(
+   $take: Int
+   $skip: Int
+   $orderBy: CourseOrderBy
+   $sortOrder: SortOrder
+   $title: String
+) {
+   courses(
+      take: $take
+      skip: $skip
+      orderBy: $orderBy
+      sortOrder: $sortOrder
+      title: $title
+   ) {
+      id
+      title
+      description
+      price
+      discount
+      currentUser
+      count
+      mainImage
+      rating
+      createdAt
+      _count {
+         users
+         reviews
+      }
+   }
+}

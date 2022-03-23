@@ -1,0 +1,29 @@
+query GetCourse($id: Float!) {
+   course(id: $id) {
+      id
+      title
+      description
+      price
+      discount
+      rating
+      currentUser
+      currentUserReview
+      userCount
+      mainImage
+      _count {
+         users
+         reviews
+      }
+      reviews {
+         rating
+         id
+         text
+         createdAt
+         currentUser
+         user {
+            name
+            lastName
+         }
+      }
+   }
+}
